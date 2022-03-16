@@ -3,6 +3,7 @@
     "description": "Simple PHP Pipeline package",
     "type": "package",
     "license": "MIT",
+    "version": "1.0",
     "autoload": {
         "psr-4": {
             "Southcoast\\Pipeline\\": "src/"
