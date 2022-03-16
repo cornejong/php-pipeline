@@ -117,7 +117,7 @@ class Pipeline
             return $this->blueprint->check($payload) === true;
         }
 
-        return @call_user_func_array($this->checker, $payload) === true;
+        return @call_user_func_array($this->checker, $payload, $this) === true;
     }
 
     public function failedChecker() : bool
@@ -158,7 +158,7 @@ class Pipeline
     protected function returnHandler($payload)
     {
         if ($this->returnHandler !== null) {
-            return @call_user_func($this->returnHandler, $payload);
+            return @call_user_func($this->returnHandler, $payload, $this);
         }
 
 
