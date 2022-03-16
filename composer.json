@@ -1,0 +1,12 @@
+{
+    "name": "southcoast/pipeline",
+    "description": "Simple PHP Pipeline package",
+    "type": "package",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Southcoast\\Pipeline\\": "src/"
+        }
+    },
+    "require": {}
+}
