@@ -30,6 +30,8 @@ class Pipeline
     protected $checker = null;
     protected $payload = null;
     protected $returnHandler = null;
+    protected $failedChecker = false;
+    protected $failedCheckerAt = null;
 
     public function __construct(Blueprint $blueprint = null)
     {
@@ -118,6 +120,16 @@ class Pipeline
         return @call_user_func_array($this->checker, $payload) === true;
     }
 
+    public function failedChecker() : bool
+    {
+        return $this->failedChecker;
+    }
+
+    public function failedCheckerAt() : int
+    {
+        return $this->failedCheckerAt;
+    }
+
     public function run($payload = null)
     {
         if ($payload !== null) {
@@ -126,7 +138,7 @@ class Pipeline
 
         $payload = $this->payload;
 
-        foreach ($this->blueprint->pipes() ?? $this->pipes() as $pipe) {
+        foreach ($this->blueprint->pipes() ?? $this->pipes() as $pipeIndex => $pipe) {
             $response = call_user_func(is_string($pipe) ? new $pipe : $pipe, $payload);
 
             if (!is_null($response)) {
@@ -134,6 +146,8 @@ class Pipeline
             }
 
             if (!$this->passesChecker($payload)) {
+                $this->failedChecker = true;
+                $this->failedCheckerAt = $pipeIndex;
                 break;
             }
         }
