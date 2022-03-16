@@ -24,9 +24,6 @@ use Generator;
  */
 abstract class Blueprint implements BlueprintInterface, Pipe
 {
-    const RETURN_METHOD_NAME = 'returns';
-    const CHECK_METHOD_NAME = 'checks';
-
     protected $pipes = [];
 
     protected $returnPipe = false;
@@ -51,10 +48,10 @@ abstract class Blueprint implements BlueprintInterface, Pipe
 
     public function __invoke($payload)
     {
-        return self::run($payload);
+        return self::passthru($payload);
     }
 
-    public static function run($payload = null)
+    public static function passthru($payload = null)
     {
         return Pipeline::open(new static)->send($payload)->run();
     }

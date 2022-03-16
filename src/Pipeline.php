@@ -43,15 +43,6 @@ class Pipeline
         return $this->blueprint !== null;
     }
 
-    public function through($pipes)
-    {
-        foreach ($pipes as $pipe) {
-            $this->pipe($pipe);
-        }
-
-        return $this;
-    }
-
     public function pipes()
     {
         if ($this->isBuildOnBlueprint()) {
@@ -130,7 +121,7 @@ class Pipeline
         return $this->failedCheckerAt;
     }
 
-    public function run($payload = null)
+    public function passthru($payload = null)
     {
         if ($payload !== null) {
             $this->send($payload);
@@ -160,7 +151,6 @@ class Pipeline
         if ($this->returnHandler !== null) {
             return @call_user_func($this->returnHandler, $payload, $this);
         }
-
 
         if ($this->blueprint !== null && $this->blueprint->hasSeal()) {
             return $this->blueprint->seal($payload);
