@@ -1,6 +1,6 @@
 <?php
 
-namespace Southcoast\Pipeline\Prepared;
+namespace SouthCoast\Pipeline\Prepared;
 
 use SouthCoast\Pipeline\Abstracted\Blueprint as AbstractBlueprint;
 
