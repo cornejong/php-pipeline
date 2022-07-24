@@ -153,7 +153,7 @@ class Pipeline
         }
 
         if ($this->blueprint !== null && $this->blueprint->hasSeal()) {
-            return $this->blueprint->seal($payload);
+            return $this->blueprint->seal($payload, $this);
         }
 
         return $payload;

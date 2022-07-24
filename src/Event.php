@@ -2,7 +2,8 @@
 
 namespace SouthCoast\Pipeline;
 
-use SouthCoast\Pipeline\Error;
+use \Error;
+use SouthCoast\Pipeline\MagicObjectAccess;
 
 class Event
 {
